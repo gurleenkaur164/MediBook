@@ -1,8 +1,8 @@
-# 🏥 MediBook — Full-Stack Appointment Booking App
+#  MediBook — Full-Stack Appointment Booking App
 
 A production-ready appointment booking platform built with React + Tailwind CSS, Node.js + Express, PostgreSQL (Supabase), and JWT authentication.
 
-## 📁 Project Structure
+## Project Structure
 
 ```
 appointment-booking-app/
@@ -12,7 +12,7 @@ appointment-booking-app/
 
 ---
 
-## 🚀 Quick Start
+##  Quick Start
 
 ### 1. Database Setup (Supabase)
 
@@ -74,7 +74,7 @@ Frontend runs at: `http://localhost:5173`
 
 ---
 
-## 🔑 User Roles
+##  User Roles
 
 | Role | Capabilities |
 |---|---|
@@ -84,7 +84,7 @@ Frontend runs at: `http://localhost:5173`
 
 ---
 
-## 📡 API Endpoints
+##  API Endpoints
 
 ### Auth
 | Method | Endpoint | Description |
@@ -121,49 +121,28 @@ Frontend runs at: `http://localhost:5173`
 
 ---
 
-## 🌐 Deployment
 
-### Frontend → Vercel
-
-1. Push `frontend/` to a GitHub repo
-2. Import in Vercel
-3. Set environment variable: `VITE_API_URL=https://your-render-backend.onrender.com/api`
-4. Deploy!
-
-### Backend → Render
-
-1. Push `backend/` to GitHub
-2. Create a new **Web Service** on Render
-3. Set the following environment variables in Render:
-   - `NODE_ENV=production`
-   - `PORT=5000`
-   - `SUPABASE_URL=...`
-   - `SUPABASE_SERVICE_ROLE_KEY=...`
-   - `JWT_SECRET=...`
-   - `JWT_REFRESH_SECRET=...`
-   - `CLIENT_URL=https://your-vercel-app.vercel.app`
-4. Deploy!
 
 ---
 
-## 🎯 Features
+## Features
 
-- ✅ Multi-role authentication (Patient / Doctor / Admin)
-- ✅ JWT access + refresh token rotation
-- ✅ Doctor listing with search, filters, and sorting
-- ✅ Doctor profile with availability and reviews
-- ✅ Calendar-based slot picker for booking
-- ✅ Real-time slot conflict prevention
-- ✅ Appointment status workflow (pending → confirmed → completed)
-- ✅ In-app notifications
-- ✅ Doctor availability manager (weekly schedule + auto-generate slots)
-- ✅ Review & rating system (auto-updates doctor rating)
-- ✅ Role-based dashboards
-- ✅ Fully responsive dark UI
+-  Multi-role authentication (Patient / Doctor / Admin)
+- JWT access + refresh token rotation
+-  Doctor listing with search, filters, and sorting
+- Doctor profile with availability and reviews
+- Calendar-based slot picker for booking
+-  Real-time slot conflict prevention
+-  Appointment status workflow (pending → confirmed → completed)
+- In-app notifications
+-  Doctor availability manager (weekly schedule + auto-generate slots)
+-  Review & rating system (auto-updates doctor rating)
+- Role-based dashboards
+- Fully responsive dark UI
 
 ---
 
-## 🛠️ Tech Stack
+##  Tech Stack
 
 | Layer | Technology |
 |---|---|
