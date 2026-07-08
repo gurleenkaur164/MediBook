@@ -37,7 +37,7 @@ export const Login = () => {
           <Link to="/" style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', textDecoration: 'none' }}>
             <div style={{
               width: 42, height: 42, borderRadius: '0.75rem', display: 'flex', alignItems: 'center', justifyContent: 'center',
-              background: 'linear-gradient(135deg, #6366f1, #8b5cf6)',
+              background: 'linear-gradient(135deg, #c9a86a, #a5813f)',
             }}>
               <Stethoscope style={{ width: 22, height: 22, color: 'white' }} />
             </div>
@@ -85,7 +85,7 @@ export const Login = () => {
           <div style={{ marginTop: '1.5rem', paddingTop: '1.5rem', borderTop: '1px solid rgba(51,65,85,0.5)', textAlign: 'center' }}>
             <p style={{ color: '#94a3b8', fontSize: '0.875rem' }}>
               Don't have an account?{' '}
-              <Link to="/register" style={{ color: '#818cf8', fontWeight: 500, textDecoration: 'none' }}>Sign up free</Link>
+              <Link to="/register" style={{ color: '#c9a86a', fontWeight: 500, textDecoration: 'none' }}>Sign up free</Link>
             </p>
           </div>
         </div>

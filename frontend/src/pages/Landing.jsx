@@ -27,23 +27,18 @@ export const Landing = () => {
       <Navbar />
 
       
-      <section style={{ paddingTop: '10rem', paddingBottom: '6rem', paddingLeft: '1.5rem', paddingRight: '1.5rem' }}>
-        <div style={{ maxWidth: '72rem', margin: '0 auto', textAlign: 'center' }} className="page-enter">
-          {/* Trust badge */}
-          <div style={{
-            display: 'inline-flex', alignItems: 'center', gap: '0.5rem',
-            padding: '0.5rem 1.25rem', borderRadius: '9999px',
-            background: 'rgba(99,102,241,0.1)', border: '1px solid rgba(99,102,241,0.2)',
-            color: '#818cf8', fontSize: '0.875rem', marginBottom: '2rem'
-          }}>
-            <span style={{ width: 8, height: 8, borderRadius: '50%', background: '#34d399', display: 'inline-block', animation: 'pulse 2s infinite' }} />
-            Trusted by 10,000+ patients
+      <section style={{ position: 'relative', paddingTop: '10rem', paddingBottom: '6rem', paddingLeft: '1.5rem', paddingRight: '1.5rem', overflow: 'hidden' }}>
+        <div style={{ position: 'relative', zIndex: 1, maxWidth: '72rem', margin: '0 auto', textAlign: 'center' }} className="page-enter">
+          {/* Eyebrow */}
+          <div style={{ display: 'inline-flex', alignItems: 'center', gap: '0.75rem', marginBottom: '1.75rem' }}>
+            <span style={{ width: 28, height: 1, background: 'linear-gradient(90deg, transparent, #c9a86a)' }} />
+            <span className="eyebrow">Concierge Healthcare</span>
+            <span style={{ width: 28, height: 1, background: 'linear-gradient(90deg, #c9a86a, transparent)' }} />
           </div>
 
-          
-          <h1 style={{ fontSize: 'clamp(2.5rem, 6vw, 4.5rem)', fontWeight: 900, lineHeight: 1.1, color: 'white', marginBottom: '1.5rem' }}>
+          <h1 style={{ fontSize: 'clamp(2.75rem, 6.5vw, 5rem)', lineHeight: 1.08, marginBottom: '1.75rem' }}>
             Book the Best<br />
-            <span className="gradient-text">Doctors Near You</span>
+            <span className="gradient-text" style={{ fontStyle: 'italic' }}>Doctors Near You</span>
           </h1>
 
           
@@ -57,9 +52,8 @@ export const Landing = () => {
               Find Doctors
               <ArrowRight style={{ width: 20, height: 20 }} />
             </Link>
-            <Link to="/register" style={{
-              padding: '1rem 2rem', borderRadius: '1rem', fontSize: '1.125rem', fontWeight: 600,
-              border: '1px solid #475569', color: '#cbd5e1', textDecoration: 'none', transition: 'all 0.3s'
+            <Link to="/register" className="btn-ghost" style={{
+              padding: '1rem 2rem', borderRadius: '0.85rem', fontSize: '1.125rem', fontWeight: 600, textDecoration: 'none'
             }}>
               Join Free
             </Link>
@@ -69,7 +63,7 @@ export const Landing = () => {
           <div style={{ display: 'flex', justifyContent: 'center', gap: '1.5rem', marginTop: '2.5rem', fontSize: '0.875rem', color: '#64748b', flexWrap: 'wrap' }}>
             {['No hidden fees', 'Cancel anytime', 'Instant confirmation'].map((text) => (
               <span key={text} style={{ display: 'flex', alignItems: 'center', gap: '0.375rem' }}>
-                <CheckCircle2 style={{ width: 16, height: 16, color: '#10b981' }} /> {text}
+                <CheckCircle2 style={{ width: 16, height: 16, color: '#6fbf9b' }} /> {text}
               </span>
             ))}
           </div>
@@ -110,10 +104,10 @@ export const Landing = () => {
                 <div style={{
                   width: 64, height: 64, borderRadius: '1rem', margin: '0 auto 1.25rem',
                   display: 'flex', alignItems: 'center', justifyContent: 'center',
-                  background: 'linear-gradient(135deg, rgba(99,102,241,0.15), rgba(139,92,246,0.15))',
-                  border: '1px solid rgba(99,102,241,0.2)',
+                  background: 'linear-gradient(135deg, rgba(201,168,106,0.15), rgba(201,168,106,0.15))',
+                  border: '1px solid rgba(201,168,106,0.2)',
                 }}>
-                  <Icon style={{ width: 28, height: 28, color: '#818cf8' }} />
+                  <Icon style={{ width: 28, height: 28, color: '#c9a86a' }} />
                 </div>
                 <h3 style={{ fontWeight: 600, color: 'white', marginBottom: '0.5rem', fontSize: '1.1rem' }}>{title}</h3>
                 <p style={{ color: '#94a3b8', fontSize: '0.9rem', lineHeight: 1.6 }}>{desc}</p>
@@ -140,15 +134,15 @@ export const Landing = () => {
                   color: '#cbd5e1', textDecoration: 'none', transition: 'all 0.2s',
                   borderRadius: '0.75rem',
                 }}
-                onMouseEnter={(e) => { e.currentTarget.style.borderColor = 'rgba(99,102,241,0.4)'; e.currentTarget.style.color = '#a5b4fc'; }}
-                onMouseLeave={(e) => { e.currentTarget.style.borderColor = 'rgba(99,102,241,0.15)'; e.currentTarget.style.color = '#cbd5e1'; }}
+                onMouseEnter={(e) => { e.currentTarget.style.borderColor = 'rgba(201,168,106,0.4)'; e.currentTarget.style.color = '#e6cf95'; }}
+                onMouseLeave={(e) => { e.currentTarget.style.borderColor = 'rgba(201,168,106,0.15)'; e.currentTarget.style.color = '#cbd5e1'; }}
               >
                 {spec}
               </Link>
             ))}
           </div>
           <div style={{ textAlign: 'center', marginTop: '2rem' }}>
-            <Link to="/doctors" style={{ color: '#818cf8', fontSize: '0.875rem', display: 'inline-flex', alignItems: 'center', gap: '0.25rem', textDecoration: 'none' }}>
+            <Link to="/doctors" style={{ color: '#c9a86a', fontSize: '0.875rem', display: 'inline-flex', alignItems: 'center', gap: '0.25rem', textDecoration: 'none' }}>
               View all specializations <ArrowRight style={{ width: 16, height: 16 }} />
             </Link>
           </div>
@@ -160,7 +154,7 @@ export const Landing = () => {
         <div style={{ maxWidth: '48rem', margin: '0 auto', textAlign: 'center' }}>
           <div className="glass-card" style={{
             padding: '4rem 2.5rem',
-            background: 'linear-gradient(135deg, rgba(99,102,241,0.15), rgba(139,92,246,0.1))',
+            background: 'linear-gradient(135deg, rgba(201,168,106,0.15), rgba(201,168,106,0.1))',
           }}>
             <h2 style={{ fontSize: '2.25rem', fontWeight: 700, color: 'white', marginBottom: '1rem' }}>
               Ready to take control of your health?
@@ -183,7 +177,7 @@ export const Landing = () => {
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.5rem', marginBottom: '0.75rem' }}>
           <div style={{
             width: 28, height: 28, borderRadius: '0.5rem', display: 'flex', alignItems: 'center', justifyContent: 'center',
-            background: 'linear-gradient(135deg, #6366f1, #8b5cf6)',
+            background: 'linear-gradient(135deg, #c9a86a, #a5813f)',
           }}>
             <Stethoscope style={{ width: 14, height: 14, color: 'white' }} />
           </div>

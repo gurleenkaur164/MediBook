@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
-import { notificationService } from '../services';
+import { useNotifications } from '../context/NotificationContext';
 import {
   Bell, LogOut, Menu, X, Stethoscope,
   LayoutDashboard, UserCog, ChevronDown,
@@ -9,13 +9,12 @@ import {
 
 export const Navbar = () => {
   const { user, logout } = useAuth();
+  const { notifications, unread, connected, markRead } = useNotifications();
   const navigate = useNavigate();
   const location = useLocation();
   const [menuOpen, setMenuOpen] = useState(false);
   const [userMenuOpen, setUserMenuOpen] = useState(false);
   const [notifOpen, setNotifOpen] = useState(false);
-  const [notifications, setNotifications] = useState([]);
-  const [unread, setUnread] = useState(0);
   const [scrolled, setScrolled] = useState(false);
   const userMenuRef = useRef(null);
   const notifRef = useRef(null);
@@ -25,17 +24,6 @@ export const Navbar = () => {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
-
-  useEffect(() => {
-    if (user) {
-      notificationService.getAll({ limit: 5 })
-        .then(({ data }) => {
-          setNotifications(data.data.notifications || []);
-          setUnread(data.data.unreadCount || 0);
-        })
-        .catch(() => {});
-    }
-  }, [user, location.pathname]);
 
   useEffect(() => {
     const handler = (e) => {
@@ -63,7 +51,7 @@ export const Navbar = () => {
       background: 'rgba(15, 23, 42, 0.85)',
       backdropFilter: 'blur(20px)',
       WebkitBackdropFilter: 'blur(20px)',
-      borderBottom: '1px solid rgba(99, 102, 241, 0.15)',
+      borderBottom: '1px solid rgba(201, 168, 106, 0.15)',
     } : {
       background: 'transparent',
     }),
@@ -77,7 +65,7 @@ export const Navbar = () => {
           <Link to="/" style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', textDecoration: 'none' }}>
             <div style={{
               width: 34, height: 34, borderRadius: '0.5rem', display: 'flex', alignItems: 'center', justifyContent: 'center',
-              background: 'linear-gradient(135deg, #6366f1, #8b5cf6)',
+              background: 'linear-gradient(135deg, #c9a86a, #a5813f)',
             }}>
               <Stethoscope style={{ width: 18, height: 18, color: 'white' }} />
             </div>
@@ -92,7 +80,7 @@ export const Navbar = () => {
                 to={link.to}
                 style={{
                   fontSize: '0.875rem', fontWeight: 500, textDecoration: 'none', transition: 'color 0.2s',
-                  color: location.pathname.startsWith(link.to) ? '#818cf8' : '#cbd5e1',
+                  color: location.pathname.startsWith(link.to) ? '#c9a86a' : '#cbd5e1',
                 }}
               >
                 {link.label}
@@ -124,17 +112,22 @@ export const Navbar = () => {
                       boxShadow: '0 20px 40px rgba(0,0,0,0.4)', overflow: 'hidden', zIndex: 50,
                     }}>
                       <div style={{ padding: '0.75rem 1rem', borderBottom: '1px solid rgba(51,65,85,0.5)', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-                        <span style={{ fontWeight: 600, fontSize: '0.875rem', color: '#f1f5f9' }}>Notifications</span>
-                        <Link to="/notifications" style={{ fontSize: '0.75rem', color: '#818cf8', textDecoration: 'none' }} onClick={() => setNotifOpen(false)}>View all</Link>
+                        <span style={{ fontWeight: 600, fontSize: '0.875rem', color: '#f1f5f9', display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
+                          Notifications
+                          {connected && <span className="live-dot" title="Live" />}
+                        </span>
+                        <Link to="/notifications" style={{ fontSize: '0.75rem', color: '#c9a86a', textDecoration: 'none' }} onClick={() => setNotifOpen(false)}>View all</Link>
                       </div>
                       <div style={{ maxHeight: '18rem', overflowY: 'auto' }}>
                         {notifications.length === 0 ? (
                           <p style={{ textAlign: 'center', color: '#64748b', fontSize: '0.875rem', padding: '2rem 1rem' }}>No notifications</p>
                         ) : (
-                          notifications.map((n) => (
-                            <div key={n.id} style={{
+                          notifications.slice(0, 5).map((n) => (
+                            <div key={n.id}
+                              onClick={() => !n.is_read && markRead(n.id)}
+                              style={{
                               padding: '0.75rem 1rem', borderBottom: '1px solid rgba(51,65,85,0.3)',
-                              background: !n.is_read ? 'rgba(99,102,241,0.05)' : 'transparent',
+                              background: !n.is_read ? 'rgba(201,168,106,0.08)' : 'transparent',
                               cursor: 'pointer', transition: 'background 0.2s',
                             }}>
                               <p style={{ fontSize: '0.875rem', fontWeight: 500, color: '#e2e8f0' }}>{n.title}</p>
@@ -161,7 +154,7 @@ export const Navbar = () => {
                   >
                     <div style={{
                       width: 30, height: 30, borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center',
-                      background: 'linear-gradient(135deg, #6366f1, #8b5cf6)', fontSize: '0.75rem', fontWeight: 700, color: 'white',
+                      background: 'linear-gradient(135deg, #c9a86a, #a5813f)', fontSize: '0.75rem', fontWeight: 700, color: 'white',
                     }}>
                       {user.name?.charAt(0).toUpperCase()}
                     </div>
@@ -180,13 +173,14 @@ export const Navbar = () => {
                         <p style={{ fontSize: '0.75rem', color: '#64748b', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{user.email}</p>
                         <span style={{
                           display: 'inline-block', marginTop: '0.375rem', fontSize: '0.7rem', padding: '0.125rem 0.5rem',
-                          borderRadius: '9999px', background: 'rgba(99,102,241,0.2)', color: '#a5b4fc',
-                          border: '1px solid rgba(99,102,241,0.3)', textTransform: 'capitalize',
+                          borderRadius: '9999px', background: 'rgba(201,168,106,0.2)', color: '#e6cf95',
+                          border: '1px solid rgba(201,168,106,0.3)', textTransform: 'capitalize',
                         }}>{user.role}</span>
                       </div>
                       <div style={{ padding: '0.25rem 0' }}>
                         {[
                           { to: '/dashboard', icon: LayoutDashboard, label: 'Dashboard' },
+                          { to: '/notifications', icon: Bell, label: 'Notifications' },
                           { to: '/profile', icon: UserCog, label: 'Profile Settings' },
                         ].map(({ to, icon: Icon, label }) => (
                           <Link key={to} to={to} onClick={() => setUserMenuOpen(false)}

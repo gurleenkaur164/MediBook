@@ -40,7 +40,7 @@ export const Register = () => {
           <Link to="/" style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', textDecoration: 'none' }}>
             <div style={{
               width: 42, height: 42, borderRadius: '0.75rem', display: 'flex', alignItems: 'center', justifyContent: 'center',
-              background: 'linear-gradient(135deg, #6366f1, #8b5cf6)',
+              background: 'linear-gradient(135deg, #c9a86a, #a5813f)',
             }}>
               <Stethoscope style={{ width: 22, height: 22, color: 'white' }} />
             </div>
@@ -57,8 +57,8 @@ export const Register = () => {
               <button key={role.value} type="button" onClick={() => setForm({ ...form, role: role.value })}
                 style={{
                   padding: '0.75rem', borderRadius: '0.75rem', textAlign: 'left', cursor: 'pointer', transition: 'all 0.2s',
-                  background: form.role === role.value ? 'rgba(99,102,241,0.1)' : 'transparent',
-                  border: `1px solid ${form.role === role.value ? '#6366f1' : '#334155'}`,
+                  background: form.role === role.value ? 'rgba(201,168,106,0.1)' : 'transparent',
+                  border: `1px solid ${form.role === role.value ? '#c9a86a' : '#334155'}`,
                 }}>
                 <p style={{ fontSize: '0.875rem', fontWeight: 500, color: '#e2e8f0' }}>{role.label}</p>
                 <p style={{ fontSize: '0.75rem', color: '#64748b', marginTop: '0.25rem', lineHeight: 1.3 }}>{role.desc}</p>
@@ -123,7 +123,7 @@ export const Register = () => {
           <div style={{ marginTop: '1.5rem', paddingTop: '1.5rem', borderTop: '1px solid rgba(51,65,85,0.5)', textAlign: 'center' }}>
             <p style={{ color: '#94a3b8', fontSize: '0.875rem' }}>
               Already have an account?{' '}
-              <Link to="/login" style={{ color: '#818cf8', fontWeight: 500, textDecoration: 'none' }}>Sign in</Link>
+              <Link to="/login" style={{ color: '#c9a86a', fontWeight: 500, textDecoration: 'none' }}>Sign in</Link>
             </p>
           </div>
         </div>

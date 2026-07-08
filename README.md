@@ -134,7 +134,7 @@ Frontend runs at: `http://localhost:5173`
 - Calendar-based slot picker for booking
 -  Real-time slot conflict prevention
 -  Appointment status workflow (pending → confirmed → completed)
-- In-app notifications
+- Real-time in-app notifications (Socket.IO — pushed instantly on booking / status changes)
 -  Doctor availability manager (weekly schedule + auto-generate slots)
 -  Review & rating system (auto-updates doctor rating)
 - Role-based dashboards

@@ -1,5 +1,6 @@
 import { Star, MapPin, Clock, DollarSign } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { useTilt } from '../hooks/useTilt';
 
 const StarRating = ({ rating }) => {
   return (
@@ -18,10 +19,12 @@ const StarRating = ({ rating }) => {
 export const DoctorCard = ({ doctor }) => {
   const user = doctor.users || {};
   const avatarInitial = user.name?.charAt(0).toUpperCase() || 'D';
+  const tilt = useTilt({ max: 7 });
 
   return (
-    <Link to={`/doctors/${doctor.id}`} className="block">
-      <div className="glass-card card-hover p-5 h-full flex flex-col">
+    <Link to={`/doctors/${doctor.id}`} className="block h-full">
+      <div ref={tilt.ref} {...tilt.bind} className="glass-card tilt p-5 h-full flex flex-col">
+        <span className="tilt-glare" />
         {/* Avatar + Name */}
         <div className="flex items-start gap-4 mb-4">
           <div className="relative flex-shrink-0">

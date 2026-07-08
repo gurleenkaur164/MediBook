@@ -1,4 +1,5 @@
 const supabase = require('../db/supabase');
+const { createNotification } = require('../utils/notify');
 
 // GET /api/appointments
 const getAppointments = async (req, res, next) => {
@@ -113,8 +114,8 @@ const bookAppointment = async (req, res, next) => {
       .eq('id', doctor_id)
       .single();
     if (docUser) {
-      await supabase.from('notifications').insert({
-        user_id: docUser.user_id,
+      await createNotification({
+        userId: docUser.user_id,
         title: 'New Appointment Request',
         message: `You have a new appointment request from ${req.user.name}.`,
         type: 'appointment',
@@ -183,8 +184,12 @@ const updateStatus = async (req, res, next) => {
       cancelled: 'Your appointment has been cancelled.',
       completed: 'Your appointment has been marked as completed.',
     };
-    await supabase.from('notifications').insert({
-      user_id: appt.patient_id,
+    // Notify the counterpart: patient hears about doctor actions,
+    // doctor hears about patient cancellations.
+    const recipientId =
+      user.role === 'doctor' ? appt.patient_id : appt.doctors?.user_id;
+    await createNotification({
+      userId: recipientId,
       title: `Appointment ${status.charAt(0).toUpperCase() + status.slice(1)}`,
       message: messages[status] || `Appointment status updated to ${status}`,
       type: 'appointment',

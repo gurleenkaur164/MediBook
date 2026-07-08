@@ -20,14 +20,14 @@ const StatCard = ({ icon: Icon, label, value, color = 'indigo', trend }) => {
   };
   const c = colors[color];
   return (
-    <div className={`glass-card p-5 border ${c.border}`}>
+    <div className={`glass-card card-hover p-5 border ${c.border}`}>
       <div className="flex items-start justify-between">
         <div>
           <p className="text-slate-400 text-sm">{label}</p>
-          <p className="text-3xl font-bold text-white mt-1">{value}</p>
+          <p className="text-3xl font-bold text-white mt-1 font-display">{value}</p>
           {trend && <p className="text-xs text-emerald-400 mt-1 flex items-center gap-1"><TrendingUp className="w-3 h-3" />{trend}</p>}
         </div>
-        <div className={`w-12 h-12 ${c.bg} rounded-xl flex items-center justify-center`}>
+        <div className={`icon-tile w-12 h-12 ${c.bg}`}>
           <Icon className={`w-6 h-6 ${c.icon}`} />
         </div>
       </div>
@@ -64,7 +64,7 @@ const PatientDashboard = ({ user }) => {
   return (
     <div className="space-y-8">
       {/* Welcome */}
-      <div className="glass-card p-6" style={{ background: 'linear-gradient(135deg, rgba(99,102,241,0.15), rgba(139,92,246,0.1))' }}>
+      <div className="glass-card p-6" style={{ background: 'linear-gradient(135deg, rgba(201,168,106,0.15), rgba(201,168,106,0.1))' }}>
         <h2 className="text-2xl font-bold text-white mb-1">Welcome back, {user.name.split(' ')[0]}! 👋</h2>
         <p className="text-slate-400">Manage your health journey from here.</p>
         <Link to="/doctors" className="mt-4 inline-flex items-center gap-2 btn-gradient px-5 py-2.5 rounded-xl text-white text-sm font-medium">
@@ -150,7 +150,7 @@ const DoctorDashboard = ({ user }) => {
   return (
     <div className="space-y-8">
       {/* Welcome */}
-      <div className="glass-card p-6" style={{ background: 'linear-gradient(135deg, rgba(16,185,129,0.12), rgba(99,102,241,0.1))' }}>
+      <div className="glass-card p-6" style={{ background: 'linear-gradient(135deg, rgba(111,191,155,0.12), rgba(201,168,106,0.1))' }}>
         <div className="flex items-start justify-between flex-wrap gap-4">
           <div>
             <h2 className="text-2xl font-bold text-white mb-1">Good day, Dr. {user.name.split(' ').slice(-1)[0]}! 🩺</h2>
